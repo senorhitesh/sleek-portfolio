@@ -11,11 +11,6 @@ interface Props {
 }
 const page = async ({ params }: Props) => {
   const { component } = await params;
-  console.log("SLUG:", component);
-  console.log(
-    "FILES:",
-    componentData.map((c) => c.fileName),
-  );
   const activePageComponent = componentData.find(
     (c) => c.fileName === component,
   );

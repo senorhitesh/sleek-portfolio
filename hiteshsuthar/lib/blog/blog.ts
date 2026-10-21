@@ -12,13 +12,11 @@ export interface BlogFrontmatter {
   tags?: string[];
   coverImage?: string;
 }
-
 export interface BlogPost {
   slug: string;
   frontmatter: BlogFrontmatter;
   content: string;
 }
-
 export function getAllBlogSlugs(): string[] {
   if (!fs.existsSync(BLOGS_DIR)) return [];
   return fs
@@ -26,7 +24,6 @@ export function getAllBlogSlugs(): string[] {
     .filter((file) => file.endsWith(".mdx") || file.endsWith(".md"))
     .map((file) => file.replace(/\.mdx?$/, ""));
 }
-
 export function getBlogBySlug(slug: string): BlogPost | null {
   const mdxPath = path.join(BLOGS_DIR, `${slug}.mdx`);
   const mdPath = path.join(BLOGS_DIR, `${slug}.md`);
