@@ -61,7 +61,7 @@ export const Project: ProjectCardProps[] = [
     slug: "bmark",
     type: "Managment Tool",
     description:
-      "A simple bookmark management tool that keeps all your favorite links organized in one place.",
+      "GoatMCP is directory for finding  MCPs and Agent Skills and built in workflows for agents.",
     isActive: true,
     backgroundImage: projectBackgrounds.bg4,
     projectImage: projectImages.bmarked,
