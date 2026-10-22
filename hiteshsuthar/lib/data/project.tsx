@@ -40,7 +40,7 @@ export const Project: ProjectCardProps[] = [
     description:
       "GoatMCP is directory for finding  MCPs and Agent Skills and built in workflows for agents.",
     isActive: true,
-    backgroundImage: projectBackgrounds.bg4,
+    backgroundImage: projectBackgrounds.bg3,
     projectImage: projectImages.goatmcp,
     stack: [
       { icon: <RiNextjsFill size={18} />, label: "Next.js" },
