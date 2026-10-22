@@ -52,7 +52,7 @@ export const Project: ProjectCardProps[] = [
       },
     ],
     github: "https://github.com/senorhitesh",
-    link: "https://goatmcp.xyz/ref=hiteshsuthar.xyz",
+    link: "https://www.goatmcp.xyz/?ref=hiteshsuthar.xyz",
     video: "/Project/ProjectVideos/goatmcp.mp4",
   },
   {
