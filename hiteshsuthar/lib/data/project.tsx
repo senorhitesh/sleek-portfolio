@@ -38,7 +38,7 @@ export const Project: ProjectCardProps[] = [
     slug: "GoatMCP",
     type: "Directory",
     description:
-      "A simple bookmark management tool that keeps all your favorite links organized in one place.",
+      "GoatMCP is directory for finding  MCPs and Agent Skills and built in workflows for agents.",
     isActive: true,
     backgroundImage: projectBackgrounds.bg4,
     projectImage: projectImages.goatmcp,
@@ -52,7 +52,7 @@ export const Project: ProjectCardProps[] = [
       },
     ],
     github: "https://github.com/senorhitesh",
-    link: "https://bmarked.vercel.app/",
+    link: "https://goatmcp.xyz/ref=hiteshsuthar.xyz",
     video: "/Project/ProjectVideos/goatmcp.mp4",
   },
   {
@@ -61,7 +61,7 @@ export const Project: ProjectCardProps[] = [
     slug: "bmark",
     type: "Managment Tool",
     description:
-      "GoatMCP is directory for finding  MCPs and Agent Skills and built in workflows for agents.",
+      "A simple bookmark management tool that keeps all your favorite links organized in one place..",
     isActive: true,
     backgroundImage: projectBackgrounds.bg4,
     projectImage: projectImages.bmarked,
