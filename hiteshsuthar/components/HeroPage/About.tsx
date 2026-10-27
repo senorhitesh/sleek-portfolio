@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Sent02Icon, Mail01Icon, Github } from "@hugeicons/core-free-icons";
+import DesignLinkPreview from "./DesignLinkPreview";
 const About = () => {
   return (
     <div className="w-full">
@@ -22,7 +23,7 @@ const About = () => {
           .
         </h1>
         <p className="mt-2 leading-5.5 sm:text-md md:text-md">
-          Outside of work, I love to watch anime and sleep.
+          Outside of work, I love to watch anime and play chess.
         </p>
         <p className="mt-2 leading-5.5 sm:text-md md:text-md">
           You can reach me at{" "}
@@ -53,7 +54,7 @@ const About = () => {
           </Link>
         </p>{" "}
         <p className="leading-5.5 sm:text-md md:text-md">
-          See my open source codes on{" "}
+          See my <DesignLinkPreview /> and code on{" "}
           <Link
             className="inline-flex items-center gap-1 text-neutral-900 dark:text-neutral-100 font-medium hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors align-middle"
             href="https://github.com/senorhitesh"

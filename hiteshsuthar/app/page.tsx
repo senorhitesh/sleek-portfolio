@@ -8,9 +8,9 @@ export default function Home() {
         <Page.Profile />
         <Page.About />
         <Page.GithubContribution />
-        <Page.Stack />
-        <Page.Experience />
         <Page.Projects />
+        <Page.Experience />
+        <Page.Stack />
         <Page.Blogs />
         <Page.QuoteSection />
         <Page.Footer />

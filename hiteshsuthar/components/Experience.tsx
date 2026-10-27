@@ -36,8 +36,8 @@ const EXPERIENCES: ExperienceItem[] = [
   {
     id: "helxstudio",
     year: "2026",
-    role: "Full Stack Developer",
-    company: "Helx Studio",
+    role: "Full Stack Developer [Freelance]",
+    company: "freelance",
     companyUrl: "https://helxstudio.in/",
     period: "Aug '26 – Present",
     isCurrent: false,
@@ -49,7 +49,12 @@ const EXPERIENCES: ExperienceItem[] = [
     skills: [
       {
         name: "Next.js",
-        icon: <RiNextjsFill size={18} className="text-neutral-900 dark:text-white" />,
+        icon: (
+          <RiNextjsFill
+            size={18}
+            className="text-neutral-900 dark:text-white"
+          />
+        ),
       },
       {
         name: "TypeScript",
@@ -57,11 +62,22 @@ const EXPERIENCES: ExperienceItem[] = [
       },
       {
         name: "Socket.io",
-        icon: <SiSocketdotio size={17} className="text-neutral-800 dark:text-neutral-200" />,
+        icon: (
+          <SiSocketdotio
+            size={17}
+            className="text-neutral-800 dark:text-neutral-200"
+          />
+        ),
       },
       {
         name: "UI/UX Design",
-        icon: <HugeiconsIcon icon={PaintBoardIcon} size={17} className="text-pink-500" />,
+        icon: (
+          <HugeiconsIcon
+            icon={PaintBoardIcon}
+            size={17}
+            className="text-pink-500"
+          />
+        ),
       },
       {
         name: "Figma",
@@ -89,7 +105,12 @@ const EXPERIENCES: ExperienceItem[] = [
     skills: [
       {
         name: "Next.js",
-        icon: <RiNextjsFill size={18} className="text-neutral-900 dark:text-white" />,
+        icon: (
+          <RiNextjsFill
+            size={18}
+            className="text-neutral-900 dark:text-white"
+          />
+        ),
       },
       {
         name: "TypeScript",
@@ -101,7 +122,13 @@ const EXPERIENCES: ExperienceItem[] = [
       },
       {
         name: "UI/UX Design",
-        icon: <HugeiconsIcon icon={PaintBoardIcon} size={17} className="text-pink-500" />,
+        icon: (
+          <HugeiconsIcon
+            icon={PaintBoardIcon}
+            size={17}
+            className="text-pink-500"
+          />
+        ),
       },
       {
         name: "Figma",
@@ -282,7 +309,9 @@ const Experience = () => {
                         ? "border-neutral-200/70 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/60 px-4 py-3 shadow-xs"
                         : "border-transparent hover:bg-neutral-50/70 dark:hover:bg-neutral-900/60 p-2 cursor-pointer"
                     }`}
-                    onClick={!isExpanded ? () => toggleExpand(item.id) : undefined}
+                    onClick={
+                      !isExpanded ? () => toggleExpand(item.id) : undefined
+                    }
                   >
                     {/* Header Row */}
                     <div className="flex items-center justify-between gap-2">
@@ -290,24 +319,28 @@ const Experience = () => {
                         <span className="font-medium text-neutral-900 dark:text-neutral-100">
                           {item.role}
                         </span>
-                        <span className="text-neutral-400 dark:text-neutral-500 font-normal">
-                          at
-                        </span>
-                        {item.companyUrl && isExpanded ? (
-                          <a
-                            href={item.companyUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className="font-medium text-neutral-900 dark:text-neutral-100 hover:underline decoration-neutral-400 underline-offset-2"
-                          >
-                            {item.company}
-                          </a>
-                        ) : (
-                          <span className="font-medium text-neutral-900 dark:text-neutral-100">
-                            {item.company}
+                        {item.company !== "freelance" && (
+                          <span className="text-neutral-400 dark:text-neutral-500 font-normal">
+                            at
                           </span>
                         )}
+                        {item.companyUrl && isExpanded
+                          ? item.company !== "freelance" && (
+                              <a
+                                href={item.companyUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                className="font-medium text-neutral-900 dark:text-neutral-100 hover:underline decoration-neutral-400 underline-offset-2"
+                              >
+                                {item.company}
+                              </a>
+                            )
+                          : item.company !== "freelance" && (
+                              <span className="font-medium text-neutral-900 dark:text-neutral-100">
+                                {item.company}
+                              </span>
+                            )}
                       </div>
 
                       {/* Right Meta & Toggle Button */}
@@ -331,7 +364,9 @@ const Experience = () => {
                           }}
                           className="w-5 h-5 flex items-center justify-center rounded hover:bg-neutral-200/80 dark:hover:bg-neutral-800 text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors ml-1"
                           title={isExpanded ? "Collapse" : "Expand"}
-                          aria-label={isExpanded ? "Collapse details" : "Expand details"}
+                          aria-label={
+                            isExpanded ? "Collapse details" : "Expand details"
+                          }
                         >
                           <HugeiconsIcon
                             icon={isExpanded ? Cancel01Icon : UnfoldMoreIcon}

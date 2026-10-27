@@ -1,3 +1,7 @@
+"use client";
+
+import React, { useState, useRef, useEffect } from "react";
+import { motion } from "motion/react";
 
 const STACK = [
   // Row 1
@@ -5,8 +9,8 @@ const STACK = [
     name: "TypeScript",
     icon: (
       <svg
-        width="18"
-        height="18"
+        width="22"
+        height="22"
         viewBox="0 0 18 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -30,8 +34,8 @@ const STACK = [
     name: "Python",
     icon: (
       <svg
-        width="18"
-        height="18"
+        width="22"
+        height="22"
         viewBox="0 0 18 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -80,8 +84,8 @@ const STACK = [
     name: "JavaScript",
     icon: (
       <svg
-        width="18"
-        height="18"
+        width="22"
+        height="22"
         viewBox="0 0 18 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -98,8 +102,8 @@ const STACK = [
     name: "PostgreSQL",
     icon: (
       <svg
-        width="19"
-        height="19"
+        width="22"
+        height="22"
         viewBox="0 0 19 19"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -127,8 +131,8 @@ const STACK = [
     name: "React",
     icon: (
       <svg
-        width="18"
-        height="18"
+        width="22"
+        height="22"
         viewBox="0 0 28 28"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -166,8 +170,8 @@ const STACK = [
     name: "Next.js",
     icon: (
       <svg
-        width="18"
-        height="18"
+        width="22"
+        height="22"
         viewBox="0 0 18 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -222,8 +226,8 @@ const STACK = [
     name: "Bun",
     icon: (
       <svg
-        width="18"
-        height="18"
+        width="22"
+        height="22"
         viewBox="0 0 18 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -298,8 +302,8 @@ const STACK = [
     name: "Tailwind",
     icon: (
       <svg
-        width="18"
-        height="18"
+        width="22"
+        height="22"
         viewBox="0 0 18 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -315,8 +319,8 @@ const STACK = [
     name: "Motion",
     icon: (
       <svg
-        width="18"
-        height="18"
+        width="22"
+        height="22"
         viewBox="0 0 18 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -330,8 +334,8 @@ const STACK = [
     name: "Git",
     icon: (
       <svg
-        width="18"
-        height="18"
+        width="22"
+        height="22"
         viewBox="0 0 18 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -354,8 +358,8 @@ const STACK = [
     name: "Github",
     icon: (
       <svg
-        width="18"
-        height="18"
+        width="22"
+        height="22"
         viewBox="0 0 18 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -377,8 +381,8 @@ const STACK = [
     name: "Figma",
     icon: (
       <svg
-        width="18"
-        height="18"
+        width="22"
+        height="22"
         viewBox="0 0 18 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -418,8 +422,8 @@ const STACK = [
     name: "Docker",
     icon: (
       <svg
-        width="18"
-        height="13"
+        width="22"
+        height="16"
         viewBox="0 0 18 13"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -470,24 +474,119 @@ const STACK = [
   //
 ];
 
-const Badge = ({ name, icon }: { name: string; icon: React.ReactNode }) => (
-  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 text-sm font-medium hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors border border-dashed border-neutral-200 dark:border-neutral-800 cursor-default select-none whitespace-nowrap">
-    <span className="text-xs leading-none">{icon}</span>
-    {name}
-  </div>
-);
 const Stack = () => {
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [coords, setCoords] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isFresh, setIsFresh] = useState(true);
+  const isInsideRef = useRef(false);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const updatePosition = (index: number) => {
+    const itemEl = itemRefs.current[index];
+    const containerEl = containerRef.current;
+    if (itemEl && containerEl) {
+      const itemRect = itemEl.getBoundingClientRect();
+      const containerRect = containerEl.getBoundingClientRect();
+      setCoords({
+        x: itemRect.left - containerRect.left + itemRect.width / 2,
+        y: itemRect.top - containerRect.top,
+      });
+    }
+  };
+
+  const handleMouseEnter = (index: number) => {
+    updatePosition(index);
+    setIsFresh(!isInsideRef.current);
+    isInsideRef.current = true;
+    setHoveredIdx(index);
+  };
+
+  const handleMouseLeaveGroup = () => {
+    isInsideRef.current = false;
+    setHoveredIdx(null);
+  };
+
+  useEffect(() => {
+    if (hoveredIdx === null) return;
+    const handleResize = () => updatePosition(hoveredIdx);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [hoveredIdx]);
+
   return (
     <div className="w-full">
-      <div className="max-w-2xl gap-3 flex flex-col w-full mx-auto mt-3">
+      <div className="max-w-2xl gap-2 flex flex-col w-full mx-auto mt-3">
         <div>
           <p className="text-[13px] font-medium text-neutral-500 dark:text-neutral-400">
             # Skills
           </p>
         </div>
-        <div className="flex justify-baseline flex-wrap gap-2">
-          {STACK.map((item, index) => (
-            <Badge key={index} name={item.name} icon={item.icon} />
+        <div
+          ref={containerRef}
+          className="relative flex items-center flex-wrap gap-1 select-none pt-4"
+          onMouseLeave={handleMouseLeaveGroup}
+        >
+          {/* Gliding Shared Tooltip */}
+          <motion.div
+            initial={false}
+            animate={
+              hoveredIdx !== null
+                ? {
+                    opacity: 1,
+                    scale: 1,
+                    x: coords.x,
+                    y: coords.y - 6,
+                  }
+                : {
+                    opacity: 0,
+                    scale: 0.94,
+                    x: coords.x,
+                    y: coords.y - 2,
+                  }
+            }
+            transition={
+              isFresh
+                ? {
+                    opacity: { duration: 0.15, ease: "easeOut" },
+                    scale: { type: "spring", stiffness: 450, damping: 25 },
+                    x: { duration: 0 },
+                    y: { duration: 0 },
+                  }
+                : {
+                    opacity: { duration: 0 },
+                    scale: { duration: 0 },
+                    x: { type: "spring", stiffness: 450, damping: 32 },
+                    y: { type: "spring", stiffness: 450, damping: 32 },
+                  }
+            }
+            className="absolute top-0 left-0 pointer-events-none z-30"
+          >
+            <div className="-translate-x-1/2 -translate-y-full flex flex-col items-center">
+              <div className="px-2 py-0.5 rounded-md text-[11px] font-medium bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900 shadow-sm whitespace-nowrap">
+                {hoveredIdx !== null ? STACK[hoveredIdx]?.name : ""}
+              </div>
+              <div className="w-1.5 h-1.5 rotate-45 bg-neutral-900 dark:bg-neutral-100 -mt-0.5" />
+            </div>
+          </motion.div>
+
+          {/* Tech Stack Icons */}
+          {STACK.map((item, idx) => (
+            <div
+              key={item.name}
+              ref={(el) => {
+                itemRefs.current[idx] = el;
+              }}
+              onMouseEnter={() => handleMouseEnter(idx)}
+              onFocus={() => handleMouseEnter(idx)}
+              onBlur={handleMouseLeaveGroup}
+              tabIndex={0}
+              role="img"
+              aria-label={item.name}
+              className="p-2 rounded-md text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/60 transition-all duration-150 cursor-pointer flex items-center justify-center hover:scale-115 active:scale-95 outline-none focus-visible:ring-1 focus-visible:ring-neutral-400 [&>svg]:w-[22px] [&>svg]:h-[22px]"
+            >
+              {item.icon}
+            </div>
           ))}
         </div>
       </div>
