@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import displayPicture from "@/public/profile.jpg";
+import displayPicture from "@/public/profile.jpeg";
 import { getCalApi } from "@calcom/embed-react";
 
 const Profile = () => {
